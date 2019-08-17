@@ -1,35 +1,37 @@
 package org.mylearningprojs.helloWorldSimple;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 public class MessageSupportFactory {
-    private static MessageSupportFactory instance;
+    //nu are sens sa faci un bloc static doar pt initializarea fieldului instance, poti faci asta 'in place' la declarare
+    private static MessageSupportFactory instance = new MessageSupportFactory();
 
     private Properties props;
     private MessageRenderer renderer;
     private MessageProvider provider;
+
 
     private MessageSupportFactory() {
         props = new Properties();
 
         try {
             //TODO: de ce nu gaseste acest fisier?
-            props.load(this.getClass().getResourceAsStream("/msf.properties"));
+            //aveai 2 greseli
+            //1. iti lipsea getClassLoader()
+            //2. aveai proprietatile scrise gresit, e necesar ca mereu cheia si valoarea sa fie pe acelasi rand (key=value)
+            InputStream inStream = getClass().getClassLoader().getResourceAsStream("msf.properties");
+            props.load(inStream);
             String rendererClass = props.getProperty("renderer.class");
             String providerClass = props.getProperty("provider.class");
 
 //            rendererClass = "org.mylearningprojs.helloWorldSimple.StandardOutMessageRenderer";
 //            providerClass = "org.mylearningprojs.helloWorldSimple.HelloWorldMessageProvider";
-
             renderer = (MessageRenderer) Class.forName(rendererClass).getConstructor().newInstance();
             provider = (MessageProvider) Class.forName(providerClass).getConstructor().newInstance();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    static {
-        instance = new MessageSupportFactory();
     }
 
     public static MessageSupportFactory getInstance() {
@@ -39,6 +41,7 @@ public class MessageSupportFactory {
     public MessageRenderer getMessageRenderer() {
         return renderer;
     }
+
     public MessageProvider getMessageProvider() {
         return provider;
     }
