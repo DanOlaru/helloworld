@@ -4,9 +4,12 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="renderer"
-          class="org.mylearningprojs.chapter2.helloWorldSpringXML.StandardOutMessageRenderer"
-          p:messageProvider-ref="provider"/>
-    <bean id="provider"
-          class="org.mylearningprojs.chapter2.helloWorldSpringXML.HelloWorldMessageProvider"/>
+
+
+    <bean id="john" name="john johnny,jonathan;jim jon" class="java.lang.String"/>
+    <alias name="john" alias="ion"/>
+
+    <bean id="mariah" name="the Voice, mary maria; BronxMariah, moreThanWords" class="java.lang.String"/>
+    <alias name="mariah" alias="carey" />
+
 </beans>

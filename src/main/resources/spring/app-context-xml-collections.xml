@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="lyricsHolder"
+          class="org.mylearningprojs.chapter3.xml.LyricsHolder">
+    </bean>
+
+    <bean id="myShitString" class="java.lang.String">
+        <constructor-arg value="dan's String object" />
+    </bean>
+
+
+    <bean id="injectCollection"
+          class="org.mylearningprojs.chapter3.xml.CollectionInjection">
+        <property name="map">
+            <map>
+                <entry key="someValue">
+                    <value>It's Friday, we finally made it</value>
+                </entry>
+                <entry key="someBean">
+                    <ref bean="lyricsHolder"/>
+                </entry>
+
+                <entry key="someStringIMade">
+                    <ref bean="myShitString"/>
+                </entry>
+
+                <!--making my own string entry-->
+                <entry key="inlineString">
+                    <value type="java.lang.String">Dan's inline string</value>
+                </entry>
+
+                <entry key="shorterStringEntry" value="truly inline String string strung out" />
+                <entry key="sameStringAsAbove" value-ref="lyricsHolder"/>
+
+            </map>
+        </property>
+
+        <property name="props">
+            <props>
+                <prop key="firstName">John</prop>
+                <prop key="lastName">Stuart</prop>
+            </props>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>I can't believe I'm still alive.</value>
+                <ref bean="lyricsHolder"/>
+            </set>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>The more you know the more you forget</value>
+                <ref bean="lyricsHolder"/>
+            </list>
+        </property>
+    </bean>
+</beans>

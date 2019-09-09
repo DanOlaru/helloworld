@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="emailArtwork#1" class="org.mylearningprojs.chapter3.stationery.EmailArtworkSender">
+        <property name="artwork" value="email artwork #1" />
+    </bean>
+
+    <bean name="emailArtwork#2" class="org.mylearningprojs.chapter3.stationery.EmailArtworkSender">
+        <property name="artwork" value="email artwork #2" />
+    </bean>
+
+    <bean name="SCPArtwork#1" class="org.mylearningprojs.chapter3.stationery.SecureCopyProtocolArtworkSender">
+        <property name="artwork" value="SCP artwork #1"/>
+    </bean>
+
+    <bean name="SCPArtwork#2" class="org.mylearningprojs.chapter3.stationery.SecureCopyProtocolArtworkSender">
+        <property name="artwork" value="SCP artwork #2" />
+    </bean>
+
+    <bean name="SCPArtwork#3" class="org.mylearningprojs.chapter3.stationery.SecureCopyProtocolArtworkSender">
+        <property name="artwork" value="SCP artwork #3" />
+    </bean>
+
+    <bean name="FTPArtwork#1" class="org.mylearningprojs.chapter3.stationery.FtpArtworkSender">
+        <property name="artwork" value="FTP artwork #1" />
+    </bean>
+
+    <bean id="waysToSendArtwork" class="org.mylearningprojs.chapter3.stationery.ArtworkManager">
+        <property name="artwork">
+            <list>
+                <ref bean="emailArtwork#1" />
+                <ref bean="SCPArtwork#1" />
+                <ref bean="emailArtwork#2" />
+                <ref bean="emailArtwork#1" />
+                <ref bean="SCPArtwork#2" />
+                <ref bean="FTPArtwork#1" />
+                <ref bean="SCPArtwork#3" />
+
+                <bean class="org.mylearningprojs.chapter3.stationery.FtpArtworkSender">
+                    <property name="artwork" value="inline FTP Bean"/>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
+
+</beans>
